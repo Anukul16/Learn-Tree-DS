@@ -34,5 +34,6 @@ class Solution {
         list.add(String.valueOf(root.val));
         Preorder(root.left,list);
         Preorder(root.right,list);
+        
     }
 }
