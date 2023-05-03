@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public int pathSum(TreeNode root, int targetSum) {
+       if(root==null)return 0;
+       return dfs(root,(long)targetSum)+pathSum(root.left,targetSum)+pathSum(root.right,targetSum);
+    }
+    int dfs(TreeNode root,long targetSum){
+        if(root==null)return 0;
+        int count=0;
+        if(targetSum==root.val)count++;
+        
+        // System.out.println("leftTs: "+" "+(targetSum-root.val)+" ");
+        count+=dfs(root.left,targetSum-root.val);
+        // System.out.println("rightTs: "+(targetSum - root.val)+" ");
+        count+=dfs(root.right,targetSum-root.val);
+
+        return count;
+
+    }
+}
+/*
+
+ekhane basically amake root theke dekhte hbe kono path pacchi kina,root.left theke dekhte hobe and root.right theke dekhte hobe
+
+r basically ekta function jekhane kina targetSum == roo.val hocche tokhon ans+=1
+korchi r left and right er jonne call korchi jodi kono path pai targetSum equal er then count+ korchi then return korchi
+*/
